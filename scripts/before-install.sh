@@ -1,3 +1,6 @@
+echo 'Create destination directory'
+mkdir /home/ec2-user/laravel-portal/
+
 echo 'Update OS'
 sudo yum -y update
 
