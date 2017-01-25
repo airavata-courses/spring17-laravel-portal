@@ -1,25 +1,16 @@
 language: php
 
 php:
-	- 5.4
-	- 5.5
-	- 5.6
-	- hhvm
-	
+  - 5.6
+  - hhvm
+  
 #Before environment runs
 before_script:
-	- composer self-update
-	- composer install --prefer-source --no-interaction --dev
+  - composer self-update
+  - composer install --prefer-source --no-interaction --dev
 
-#To verify build
 script: phpunit
-
-matrix:
-	allow_failures:
-		- php: 5.6
-		- php: hhvm
-	fast_finish: true	
-	
+  
 branches:
   only:
     - master
@@ -29,39 +20,34 @@ sudo: false
 install: true
 
 before_deploy:
-	- pwd
-	- cd /home/travis/build/airavata-courses/spring17-laravel-portal/
-	- zip -r spring17-laravel-portal.zip app bootstrap config database public resources routes storage tests scripts server.php package.json composer.json composer.lock gulpfile.js phpunit.xml artisan appspec.yml LICENSE || true
-	- mkdir -p "dpl_cd_upload"
-	- mv spring17-laravel-portal.zip dpl_cd_upload/spring17-laravel-portal.zip || true
+  - pwd
+  - cd /home/travis/build/airavata-courses/spring17-laravel-portal/
+  - zip -r spring17-laravel-portal.zip app bootstrap config database public resources routes storage tests scripts server.php package.json composer.json composer.lock gulpfile.js phpunit.xml artisan appspec.yml LICENSE || true
+  - mkdir -p "dpl_cd_upload"
+  - mv spring17-laravel-portal.zip dpl_cd_upload/spring17-laravel-portal.zip || true
 
 deploy:
-	- provider: s3
-		access_key_id: $AWS_ACCESS_KEY #Declared in Travis repo settings
-		secret_access_key: $AWS_SECRET_KEY
-		bucket: laravel-portal-bucket
-		local_dir: dpl_cd_upload
-		region: us-west-2
-		skip_cleanup: true
-		acl: public_read
-		detect_encoding: true
-		on:
-		  repo: airavata-courses/spring17-laravel-portal
-		  all_branches: true
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: laravel-portal-bucket
+    local_dir: dpl_cd_upload
+    region: us-west-2
+    skip_cleanup: true
+    acl: public_read
+    detect_encoding: true
+    on:
+      branch: master
       
-	- provider: codedeploy
-		access_key_id: $AWS_ACCESS_KEY #Declared in Travis repo settings
-		secret_access_key: $AWS_SECRET_KEY
-		bucket: laravel-portal-bucket
-		key: spring17-laravel-portal.zip
-		bundle_type: zip
-		application: laravel-portal-application
-		deployment_group: laravel-portal-group
-		region: us-west-2
-		skip_cleanup: true
-		on:
-		  repo: airavata-courses/spring17-laravel-portal
-		  all_branches: true
-	  
-after_deploy:
-	- echo "Performing after deploy procedures..."
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: laravel-portal-bucket
+    key: spring17-laravel-portal.zip
+    bundle_type: zip
+    application: laravel-portal-application
+    deployment_group: laravel-portal-group
+    region: us-west-2
+    skip_cleanup: true
+    on:
+      branch: master
