@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/laravel-portal
+hooks:
+  BeforeInstall:
+    - location: scripts/before-install.sh
+      timeout: 3600
+      runas: root
+  ApplicationStart:
+    - location: scripts/install.sh
+      timeout: 3600
+      runas: root
