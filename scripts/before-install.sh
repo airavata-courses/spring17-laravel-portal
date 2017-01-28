@@ -4,9 +4,6 @@ mkdir /home/ec2-user/laravel-portal/
 echo 'Update OS'
 sudo yum -y update
 
-echo 'Installing git version control'
-sudo yum install -y git-all.noarch
-
 echo 'Install aws-cli'
 sudo yum install -y aws-cli
 
