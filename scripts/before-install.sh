@@ -1,11 +1,15 @@
-echo 'Create destination directory'
-mkdir /home/ec2-user/laravel-portal/
+
+echo 'Cleaning previous laravel directory if any'
+sudo rm -fd /home/ec2-user/laravel-portal/ || true
+
+echo 'Creating destination directory'
+sudo mkdir /home/ec2-user/laravel-portal/
 
 echo 'Update OS'
 sudo yum -y update
 
 echo 'Change directory'
-cd /home/ec2-user/laravel-portal
+cd /home/ec2-user/laravel-portal/
 
 echo 'Check if PHP is installed'
 php --version
