@@ -4,28 +4,6 @@ mkdir /home/ec2-user/laravel-portal/
 echo 'Update OS'
 sudo yum -y update
 
-echo 'Install aws-cli'
-sudo yum install -y aws-cli
-
-echo 'Move to user home directory'
-cd /home/ec2-user/
-
-echo 'Configure AWS'
-echo "$AWS_ACCESS_KEY
-$AWS_SECRET_ACCESS_KEY
-
-
-" | aws configure
-
-echo 'Set up S3 access for aws code deploy'
-aws s3 cp s3://aws-codedeploy-us-west-2/latest/install . --region us-west-2
-chmod +x ./install
-sed -i "s/sleep(.*)/sleep(10)/" install
-sudo ./install auto
-
-echo 'Start AWS code deploy agent'
-sudo service codedeploy-agent start
-
 echo 'Change directory'
 cd /home/ec2-user/laravel-portal
 
