@@ -7,10 +7,8 @@ cd laravel-portal/
 cp .env.example .env
 sudo chmod 777 -R storage/
 sudo chmod 777 .env
-echo 'Logs begin here...' >> /var/log/composer.log
-pwd >> /var/log/composer.log
 composer install >> /var/log/composer.log 2>&1 &
-php artisan key:generate >> /var/log/composer.log 2>&1 &
+php artisan key:generate
 php artisan serve --port=4000 --host=0.0.0.0 & >> /var/log/composer.log 2>&1 &
 
 echo 'Running Docker container'
