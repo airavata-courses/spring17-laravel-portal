@@ -41,7 +41,7 @@ echo 'Update Composer'
 composer update
 
 echo 'Move back to ec2-user directory'
-cd /home/ec2-user
+cd /home/ec2-user/laravel-portal/
 
 echo 'Check if Docker is installed'
 docker -v
