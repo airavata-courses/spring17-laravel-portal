@@ -9,7 +9,7 @@ sudo chmod 777 -R storage/ vendor/
 sudo chmod 777 .env
 composer install
 php artisan key:generate
-php artisan serve --port=7000 --host=0.0.0.0
+php artisan serve --port=4000 --host=0.0.0.0 &
 
 echo 'Running Docker container'
 sudo docker login -e="sneha.tilak26@gmail.com" -u="tilaks" -p="laravel"
