@@ -26,6 +26,8 @@ if [ "$?" -ne 0 ]; then
 	sudo rm -rf develop.zip
 	cd /var/www/laravel-develop/
 	composer install
+	cp .env.example .env
+	php artisan key:generate
 fi
 
 echo 'Update Composer'
