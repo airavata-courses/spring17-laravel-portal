@@ -8,7 +8,7 @@ before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction --dev
 
-script: cd .
+script: ls
 
 matrix:
   allow_failures:
@@ -16,11 +16,18 @@ matrix:
 
 branches:
   only:
-    - master
+    - develop
 
-sudo: false
+sudo: required
 
-install: true
+services:
+  - docker
+
+install:
+  - docker build -t tilaks/laravel-portal .
+  - docker ps -a
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push tilaks/laravel-portal
 
 before_deploy:
   - pwd
@@ -40,7 +47,7 @@ deploy:
     acl: public_read
     detect_encoding: true
     on:
-      branch: master
+      branch: develop
       
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
@@ -53,4 +60,4 @@ deploy:
     region: us-west-2
     skip_cleanup: true
     on:
-      branch: master
+      branch: develop

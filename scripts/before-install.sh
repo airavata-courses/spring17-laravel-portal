@@ -1,5 +1,14 @@
+echo 'Cleaning previous laravel directory if any'
+sudo rm -fd /home/ec2-user/laravel-portal/ || true
+
+echo 'Creating destination directory'
+sudo mkdir /home/ec2-user/laravel-portal/
+
 echo 'Update OS'
 sudo yum -y update
+
+echo 'Change directory'
+cd /home/ec2-user/laravel-portal/
 
 echo 'Check if PHP is installed'
 php --version
@@ -34,7 +43,7 @@ echo 'Update Composer'
 composer update
 
 echo 'Move back to ec2-user directory'
-cd /home/ec2-user
+cd /home/ec2-user/laravel-portal/
 
 echo 'Check if Docker is installed'
 docker -v
@@ -42,12 +51,15 @@ if [ "$?" -ne 0 ]; then
 	sudo yum install -y docker-io
 fi
 
+echo 'Add current user to Docker group'
+sudo usermod -aG docker $(whoami)
+
 echo 'Starting Docker services'
 sudo service docker start
 	
 echo 'Remove existing containers if any'
-sudo docker ps -a | grep -w "laravel-container" | awk '{print $1}' | xargs --no-run-if-empty docker stop
-sudo docker ps -a | grep -w "laravel-container" | awk '{print $1}' | xargs --no-run-if-empty docker rm
+sudo docker ps -a | grep -w "laravel" | awk '{print $1}' | xargs --no-run-if-empty docker stop
+sudo docker ps -a | grep -w "laravel" | awk '{print $1}' | xargs --no-run-if-empty docker rm
 
 echo 'Remove existing images if any'
-sudo docker images | grep -w "laravel-image" | awk '{print $3}' | xargs --no-run-if-empty docker rmi -f
+sudo docker images | grep -w "tilaks/laravel-portal" | awk '{print $3}' | xargs --no-run-if-empty docker rmi -f
