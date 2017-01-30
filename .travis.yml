@@ -18,9 +18,17 @@ branches:
   only:
     - develop
 
-sudo: false
+sudo: required
 
-install: true
+services:
+  - docker
+
+install:
+  - cd "laravel-portal"
+  - docker build -t tilaks/laravel-portal .
+  - docker ps -a
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push tilaks/laravel-portal
 
 before_deploy:
   - pwd
