@@ -5,20 +5,21 @@ echo 'Creating destination directory'
 sudo mkdir /home/ec2-user/laravel-portal/
 sudo chmod -R 777 laravel-portal/
 
-echo 'Update OS'
-sudo yum -y update
-
 echo 'Check if PHP is installed'
 php --version
 if [ "$?" -ne 0 ]; then
 	sudo yum clean all
 	sudo yum -y update
-	sudo yum -y install epel-release
-	wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-	wget https://centos6.iuscommunity.org/ius-release.rpm
-	sudo rpm -Uvh ius-release*.rpm
+	sudo yum install -y httpd24 php56
+	sudo yum install -y php56-devel php56-mysql php56-pdo php56-mbstring
+	sudo yum install -y php-pear
+	sudo pear install Log
+	sudo yum install -y pcre-devel
+	sudo service httpd start
+	sudo yum install -y php56-pecl-apc
+	sudo /sbin/chkconfig --levels 235 httpd on
+	sudo service httpd restart
 	sudo yum -y update
-	sudo yum -y install php56u php56u-opcache php56u-xml php56u-mcrypt php56u-gd php56u-devel php56u-mysql php56u-intl php56u-mbstring php56u-bcmath
 fi
 
 echo 'Check if Composer is installed'
