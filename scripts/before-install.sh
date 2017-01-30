@@ -3,6 +3,7 @@ sudo rm -rf /home/ec2-user/laravel-portal/ || true
 
 echo 'Creating destination directory'
 sudo mkdir /home/ec2-user/laravel-portal/
+sudo chmod -R 777 laravel-portal/
 
 echo 'Update OS'
 sudo yum -y update

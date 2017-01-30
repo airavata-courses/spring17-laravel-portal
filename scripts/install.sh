@@ -7,10 +7,10 @@ cd laravel-portal/
 composer install
 cp .env.example .env
 php artisan key:generate
-php artisan serve --port=8000 --host=0.0.0.0
+php artisan serve --port=7000 --host=0.0.0.0
 
 echo 'Running Docker container'
 sudo docker login -e="sneha.tilak26@gmail.com" -u="tilaks" -p="laravel"
 sudo docker pull tilaks/laravel-portal
 sudo docker images | grep '<none>' | awk '{print $3}' | xargs --no-run-if-empty docker rmi -f
-sudo docker run -d -p 8081:8000 --name laravel $(docker images | grep -w "tilaks/laravel-portal" | awk '{print $3}') >> /var/log/laravel.log 2>&1 &
+sudo docker run -d -p 7000:8000 --name laravel $(docker images | grep -w "tilaks/laravel-portal" | awk '{print $3}') >> /var/log/laravel.log 2>&1 &
