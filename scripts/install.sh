@@ -4,8 +4,10 @@ cd /home/ec2-user/
 echo 'Move files to laravel-portal'
 sudo mv Dockerfile app bootstrap config package.json readme.md scripts tests LICENSE appspec.yml composer.json database phpunit.xml resources server.php Trigger.txt artisan composer.lock gulpfile.js public routes storage .env.example laravel-portal/
 cd laravel-portal/
-composer install
 cp .env.example .env
+sudo chmod 777 -R storage/ vendor/
+sudo chmod 777 .env
+composer install
 php artisan key:generate
 php artisan serve --port=7000 --host=0.0.0.0
 
