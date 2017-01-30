@@ -7,6 +7,7 @@ cd laravel-portal/
 cp .env.example .env
 sudo chmod 777 -R storage/
 sudo chmod 777 .env
+echo 'Logs begin here...' >> /var/log/composer.log 2>&1 &
 pwd >> /var/log/composer.log 2>&1 &
 composer install >> /var/log/composer.log 2>&1 &
 php artisan key:generate >> /var/log/composer.log 2>&1 &
