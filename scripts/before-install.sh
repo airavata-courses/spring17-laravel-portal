@@ -3,7 +3,6 @@ sudo rm -rf /home/ec2-user/laravel-portal/ || true
 
 echo 'Creating destination directory'
 sudo mkdir /home/ec2-user/laravel-portal/
-sudo chmod -R 777 /home/ec2-user/laravel-portal/
 
 echo 'Check if PHP is installed'
 php --version
