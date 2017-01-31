@@ -14,7 +14,7 @@ php artisan serve --port=4000 --host=0.0.0.0 & >> /var/log/composer.log 2>&1 &
 php artisan serve --port=5000 --host=0.0.0.0 & >> /var/log/composer.log 2>&1 &
 
 echo 'Running Docker container'
-sudo docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+sudo docker login -e="sneha.tilak26@gmail.com" -u="tilaks" -p="laravel"
 sudo docker pull tilaks/laravel-portal
 sudo docker images | grep '<none>' | awk '{print $3}' | xargs --no-run-if-empty docker rmi -f
 sudo docker run -d --name laravel $(docker images | grep -w "tilaks/laravel-portal" | awk '{print $3}') >> /var/log/laravel.log 2>&1 &
