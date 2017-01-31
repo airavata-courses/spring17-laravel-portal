@@ -29,7 +29,8 @@ if [ "$?" -ne 0 ]; then
 	curl -sS https://getcomposer.org/installer | php
 	sudo mv composer.phar /usr/local/bin/composer
 	chmod +x /usr/local/bin/composer
-	alias composer='/usr/local/bin/composer'
+	sudo ln -s /usr/local/bin/composer /usr/bin/composer
+	sudo alias composer='/usr/local/bin/composer'
 fi
 
 echo 'Check if Docker is installed'

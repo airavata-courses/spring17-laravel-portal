@@ -5,8 +5,7 @@ php:
   
 #Before environment runs
 before_script:
-  - composer self-update
-  - composer install --prefer-source --no-interaction --dev
+  - ls
 
 script: ls
 
