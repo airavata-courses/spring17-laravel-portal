@@ -4,7 +4,7 @@ sudo rm -rf /home/ec2-user/laravel-portal/ || true
 echo 'Creating destination directory'
 sudo mkdir /home/ec2-user/laravel-portal/
 
-echo 'Check if PHP is installed'
+echo 'Check if PHP is installed. If not, install it on the instance'
 php --version
 if [ "$?" -ne 0 ]; then
 	sudo yum clean all
@@ -21,7 +21,7 @@ if [ "$?" -ne 0 ]; then
 	sudo yum -y update
 fi
 
-echo 'Check if Composer is installed'
+echo 'Check if Composer is installed. If not, install it on the instance'
 composer --version
 if [ "$?" -ne 0 ]; then
 	cd ~/
@@ -32,7 +32,7 @@ if [ "$?" -ne 0 ]; then
 	sudo alias composer='/usr/local/bin/composer'
 fi
 
-echo 'Check if Docker is installed'
+echo 'Check if Docker is installed. If not, install it on the instance'
 docker -v
 if [ "$?" -ne 0 ]; then
 	sudo yum install -y docker-io
@@ -41,7 +41,7 @@ fi
 echo 'Add current user to Docker group'
 sudo usermod -aG docker $(whoami)
 
-echo 'Starting Docker services'
+echo 'Start Docker services'
 sudo service docker start
 	
 echo 'Remove existing containers if any'

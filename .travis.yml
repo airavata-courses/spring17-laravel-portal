@@ -1,5 +1,7 @@
+#Language used
 language: php
 
+#Version of PHP used
 php:
   - 5.6
   
@@ -7,27 +9,32 @@ php:
 before_script:
   - ls
 
+#Run a dummy command 
 script: ls
 
 matrix:
   allow_failures:
     - php: 5.6
 
+#Branches to be deployed
 branches:
   only:
     - develop
 
 sudo: required
 
+#Services to run on the instance
 services:
   - docker
 
+#Push the docker image on to DockerHub
 install:
   - docker build -t tilaks/laravel-portal .
   - docker ps -a
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - docker push tilaks/laravel-portal
 
+#Zip the artifacts to be deployed
 before_deploy:
   - pwd
   - cd /home/travis/build/airavata-courses/spring17-laravel-portal/
@@ -35,10 +42,11 @@ before_deploy:
   - mkdir -p "dpl_cd_upload"
   - mv spring17-laravel-portal.zip dpl_cd_upload/spring17-laravel-portal.zip || true
 
+#Instructions to to deploy
 deploy:
   - provider: s3
-    access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
-    secret_access_key: $AWS_SECRET_KEY
+    access_key_id: $AWS_ACCESS_KEY #Declared in Travis repository settings
+    secret_access_key: $AWS_SECRET_KEY #Declared in Travis repository settings
     bucket: laravel-portal-bucket
     local_dir: dpl_cd_upload
     region: us-west-2
@@ -49,8 +57,8 @@ deploy:
       branch: develop
       
   - provider: codedeploy
-    access_key_id: $AWS_ACCESS_KEY # declared in Travis repo settings
-    secret_access_key: $AWS_SECRET_KEY
+    access_key_id: $AWS_ACCESS_KEY #Declared in Travis repository settings
+    secret_access_key: $AWS_SECRET_KEY #Declared in Travis repository settings
     bucket: laravel-portal-bucket
     key: spring17-laravel-portal.zip
     bundle_type: zip
