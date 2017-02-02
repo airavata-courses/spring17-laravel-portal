@@ -14,21 +14,6 @@ RUN apt-get update && apt-get install -y zlib1g-dev \
 
 ADD . /var/www/laravel-develop
 ADD ./public /var/www/html
-    
-#Install the dependencies
-RUN cd /var/www/laravel-develop && \
-    composer install --no-interaction    
-
-#Copy to .env
-COPY .env.example .env
-	
-#Generate the Artisan key
-RUN php artisan key:generate
-
-#Run Laravel Portals
-RUN php artisan serve --port=3000 --host=0.0.0.0 && \
-	php artisan serve --port=4000 --host=0.0.0.0 && \
-	php artisan serve --port=5000 --host=0.0.0.0
 
 EXPOSE 3000
 EXPOSE 4000
