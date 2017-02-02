@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y zlib1g-dev \
 ADD . /var/www/laravel-develop
 ADD ./public /var/www/html
 
-RUN cd /var/www/laravel-develop
+RUN chmod -R 777 /var/www/laravel-develop && \
+	cd /var/www/laravel-develop
 
 RUN ./script.sh >> /var/log/script.log 2>&1 &
 

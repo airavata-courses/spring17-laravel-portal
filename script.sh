@@ -1,7 +1,3 @@
-echo 'Change directory to laravel-develop'
-cd /var/www/laravel-develop
-chmod -R 777 /var/www/laravel-develop
-
 echo 'Install composer'
 composer install
 
