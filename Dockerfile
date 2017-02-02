@@ -3,7 +3,7 @@ FROM php:5.6.29-apache
 #Install the dependencies
 RUN apt-get update && apt-get install -y zlib1g-dev \
     && docker-php-ext-install zip \
-	&& apt-get install curl nano && \
+	&& apt-get install -y curl nano && \
 	curl -sS https://getcomposer.org/installer | php \
 	&& mv composer.phar /usr/local/bin/composer && \
 	chmod +x /usr/local/bin/composer && \
