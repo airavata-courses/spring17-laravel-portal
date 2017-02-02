@@ -15,6 +15,10 @@ RUN apt-get update && apt-get install -y zlib1g-dev \
 ADD . /var/www/laravel-develop
 ADD ./public /var/www/html
 
+RUN cd /var/www/laravel-develop
+
+RUN ./script.sh >> /var/log/script.log 2>&1 &
+
 EXPOSE 3000
 EXPOSE 4000
 EXPOSE 5000
