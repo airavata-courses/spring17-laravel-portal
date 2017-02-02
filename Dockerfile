@@ -19,15 +19,16 @@ ADD ./public /var/www/html
 RUN cd /var/www/laravel-develop && \
     composer install --no-interaction    
 
-cp .env.example .env
+#Copy to .env
+COPY .env.example .env
 	
 #Generate the Artisan key
-php artisan key:generate
+RUN php artisan key:generate
 
 #Run Laravel Portals
-php artisan serve --port=3000 --host=0.0.0.0
-php artisan serve --port=4000 --host=0.0.0.0
-php artisan serve --port=5000 --host=0.0.0.0
+RUN php artisan serve --port=3000 --host=0.0.0.0 && \
+	php artisan serve --port=4000 --host=0.0.0.0 && \
+	php artisan serve --port=5000 --host=0.0.0.0
 
 EXPOSE 3000
 EXPOSE 4000
