@@ -16,7 +16,7 @@ ADD . /var/www/laravel-develop
 ADD ./public /var/www/html
 
 RUN cd /var/www/laravel-develop && \
-	chmod -R 777 /var/www/laravel-develop && \
+	chmod -R 777 /var/www/laravel-develop
 
 RUN /script.sh
 
