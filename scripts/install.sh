@@ -17,12 +17,18 @@ sudo docker exec -it laravel bash
 
 echo 'Change directory to laravel-develop'
 cd /var/www/laravel-develop
+chmod -R 777 /var/www/laravel-develop
+
+pwd >> /var/log/docker.log 2>&1 &
 
 echo 'Install composer'
 composer install
 
 echo 'Copy to .env'
 cp .env.example .env
+
+echo 'Change .env permission'
+chmod 777 .env
 
 echo 'Generate the Artisan key'
 php artisan key:generate
