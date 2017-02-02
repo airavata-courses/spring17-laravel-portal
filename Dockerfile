@@ -12,9 +12,6 @@ RUN apt-get update && apt-get install -y zlib1g-dev \
 	docker-php-ext-install pdo_mysql && \
 	a2enmod rewrite
 
-# Add update nginx config
-COPY conf/nginx-site.conf /etc/nginx/sites-available/default.conf
-
 ADD . /var/www/laravel-develop
 ADD ./public /var/www/html
     
