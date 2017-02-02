@@ -17,7 +17,8 @@ ADD ./public /var/www/html
 
 RUN cd /var/www/laravel-develop && \
 	chmod -R 777 /var/www/laravel-develop && \
-	./script.sh
+
+RUN /script.sh
 
 EXPOSE 3000
 EXPOSE 4000
