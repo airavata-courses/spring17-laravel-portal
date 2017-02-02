@@ -1,3 +1,9 @@
+echo 'Change permission of directory'
+chmod -R 777 /var/www/laravel-develop
+
+echo 'Change directory'
+cd /var/www/laravel-develop
+
 echo 'Install composer'
 composer install
 
