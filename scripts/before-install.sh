@@ -1,6 +1,10 @@
 echo 'Cleaning previous laravel directory if any'
 sudo rm -rf /home/ec2-user/laravel-portal/ || true
 
+echo 'Creating Laravel Log file'
+sudo touch /var/log/laravel.log
+sudo chmod 777 /var/log/laravel.log
+
 echo 'Creating destination directory'
 sudo mkdir /home/ec2-user/laravel-portal/
 
