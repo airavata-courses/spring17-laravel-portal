@@ -38,7 +38,7 @@ install:
 before_deploy:
   - pwd
   - cd /home/travis/build/airavata-courses/spring17-laravel-portal/
-  - zip -r spring17-laravel-portal.zip Dockerfile app bootstrap config package.json readme.md scripts tests LICENSE script.sh appspec.yml composer.json database phpunit.xml resources server.php Trigger.txt artisan composer.lock gulpfile.js public routes storage .env.example || true
+  - zip -r spring17-laravel-portal.zip Dockerfile app bootstrap config package.json readme.md scripts tests LICENSE script.sh appspec.yml composer.json database phpunit.xml resources server.php Trigger.txt artisan composer.lock gulpfile.js public routes storage .env.example composer_install.sh || true
   - mkdir -p "dpl_cd_upload"
   - mv spring17-laravel-portal.zip dpl_cd_upload/spring17-laravel-portal.zip || true
 

@@ -43,7 +43,7 @@ sudo usermod -aG docker $(whoami)
 
 echo 'Start Docker services'
 sudo service docker start
-	
+
 echo 'Remove existing containers if any'
 sudo docker ps -a | grep -w "laravel" | awk '{print $1}' | xargs --no-run-if-empty docker stop
 sudo docker ps -a | grep -w "laravel" | awk '{print $1}' | xargs --no-run-if-empty docker rm
