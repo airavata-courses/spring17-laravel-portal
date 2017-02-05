@@ -2,7 +2,7 @@
 sudo apt-get update
 
 ## Install AWS CLI
-sudo apt-get install awscli
+sudo apt-get -y install awscli
 
 ## Install Amazon Codedeploy agent
 sudo apt-get update
