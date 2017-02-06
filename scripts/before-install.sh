@@ -8,34 +8,6 @@ sudo chmod 777 /var/log/laravel.log
 echo 'Creating destination directory'
 sudo mkdir /home/ec2-user/laravel-portal/
 
-echo 'Check if PHP is installed. If not, install it on the instance'
-php --version
-if [ "$?" -ne 0 ]; then
-	sudo yum clean all
-	sudo yum -y update
-	sudo yum install -y httpd24 php56
-	sudo yum install -y php56-devel php56-mysql php56-pdo php56-mbstring
-	sudo yum install -y php-pear
-	sudo pear install Log
-	sudo yum install -y pcre-devel
-	sudo service httpd start
-	sudo yum install -y php56-pecl-apc
-	sudo /sbin/chkconfig --levels 235 httpd on
-	sudo service httpd restart
-	sudo yum -y update
-fi
-
-echo 'Check if Composer is installed. If not, install it on the instance'
-composer --version
-if [ "$?" -ne 0 ]; then
-	cd ~/
-	curl -sS https://getcomposer.org/installer | php
-	sudo mv composer.phar /usr/local/bin/composer
-	chmod +x /usr/local/bin/composer
-	sudo ln -s /usr/local/bin/composer /usr/bin/composer
-	sudo alias composer='/usr/local/bin/composer'
-fi
-
 echo 'Check if Docker is installed. If not, install it on the instance'
 docker -v
 if [ "$?" -ne 0 ]; then
