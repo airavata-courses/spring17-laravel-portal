@@ -13,6 +13,6 @@ sudo docker images | grep '<none>' | awk '{print $3}' | xargs --no-run-if-empty 
 sudo docker run -p 3000:3000 -p 4000:4000 -p 5000:5000 -d --name laravel tilaks/laravel-portal >> /var/log/laravel.log 2>&1
 
 sudo docker exec -it laravel bash /var/www/laravel-develop/composer_install.sh
-sudo docker exec -it -d laravel bash /var/www/laravel-develop/script.sh 3000
-sudo docker exec -it -d laravel bash /var/www/laravel-develop/script.sh 4000
-sudo docker exec -it -d laravel bash /var/www/laravel-develop/script.sh 5000
+sudo docker exec -it -d laravel php /var/www/laravel-develop/artisan serve --port=3000 --host=0.0.0.0
+sudo docker exec -it -d laravel php /var/www/laravel-develop/artisan serve --port=4000 --host=0.0.0.0
+sudo docker exec -it -d laravel php /var/www/laravel-develop/artisan serve --port=5000 --host=0.0.0.0
