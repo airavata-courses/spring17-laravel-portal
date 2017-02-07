@@ -10,9 +10,9 @@ echo 'Running the Docker container'
 sudo docker login -e="sneha.tilak26@gmail.com" -u="tilaks" -p="laravel"
 sudo docker pull tilaks/laravel-portal
 sudo docker images | grep '<none>' | awk '{print $3}' | xargs --no-run-if-empty docker rmi -f
-sudo docker run -d --name laravel tilaks/laravel-portal 
+sudo docker run -d --name laravel tilaks/laravel-portal >> /var/log/laravel.log 2>&1
 
-sudo docker exec -it laravel bash /var/www/laravel-develop/composer_install.sh
-sudo docker exec -it -d laravel php /var/www/laravel-develop/artisan serve --port=3000 --host=0.0.0.0
-sudo docker exec -it -d laravel php /var/www/laravel-develop/artisan serve --port=4000 --host=0.0.0.0
-sudo docker exec -it -d laravel php /var/www/laravel-develop/artisan serve --port=5000 --host=0.0.0.0
+sudo docker exec -it laravel /bin/bash /var/www/laravel-develop/composer_install.sh >> /var/log/laravel.log 2>&1
+sudo docker exec -it -d laravel php /var/www/laravel-develop/artisan serve --port=3000 --host=0.0.0.0 >> /var/log/laravel.log 2>&1
+sudo docker exec -it -d laravel php /var/www/laravel-develop/artisan serve --port=4000 --host=0.0.0.0 >> /var/log/laravel.log 2>&1
+sudo docker exec -it -d laravel php /var/www/laravel-develop/artisan serve --port=5000 --host=0.0.0.0 >> /var/log/laravel.log 2>&1
