@@ -4,7 +4,7 @@ language: php
 #Version of PHP used
 php:
   - 5.6
-  
+
 #Before environment runs
 before_script:
   - ls
@@ -55,7 +55,7 @@ deploy:
     detect_encoding: true
     on:
       branch: develop
-      
+
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY #Declared in Travis repository settings
     secret_access_key: $AWS_SECRET_KEY #Declared in Travis repository settings
