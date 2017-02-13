@@ -31,10 +31,22 @@ sudo wget -N https://raw.githubusercontent.com/airavata-courses/spring17-devops/
 sudo service haproxy stop
 sudo service haproxy start
 
-## Start consul server
+####### Consul server #######
 sudo touch /var/log/sga-consul.log
 sudo chmod 777 /var/log/sga-consul.log
 sudo docker run -d -e SERVICE_IGNORE -p 8400:8400 -p 8500:8500 -p 8300:8300 -p 8301:8301 -p 8301:8301/udp -p 8302:8302 -p 8302:8302/udp -p 8600:53/udp -h consul --name consul progrium/consul -server -advertise `wget -qO- http://instance-data/latest/meta-data/public-ipv4` -bootstrap >> /var/log/sga-consul.log 2>&1
 
-## Start Registrator
-sudo docker run -d --name=registrator --net=host --volume=/var/run/docker.sock:/tmp/docker.sock gliderlabs/registrator:latest consul://localhost:8500
+
+###### Consul-template ######
+
+#Get consul-template
+cd /tmp/
+wget https://releases.hashicorp.com/consul-template/0.18.0/consul-template_0.18.0_linux_amd64.tgz -O /tmp/consul-template.tgz
+tar -xvzf consul-template.tgz
+
+#Get Config files
+wget https://raw.githubusercontent.com/airavata-courses/spring17-devops/feature-loadbalancer/haproxy.json
+wget https://raw.githubusercontent.com/airavata-courses/spring17-devops/feature-loadbalancer/haproxy.ctmpl
+
+#run consul-template
+sudo /tmp/consul-template -config /tmp/haproxy.json -consul-addr 127.0.0.1:8500 &
