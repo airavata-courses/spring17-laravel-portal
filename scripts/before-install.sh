@@ -11,7 +11,13 @@ sudo mkdir /home/ec2-user/laravel-portal/
 echo 'Check if Docker is installed. If not, install it on the instance'
 docker -v
 if [ "$?" -ne 0 ]; then
-	sudo yum install -y docker-io
+	sudo apt-get -y install apt-transport-https ca-certificates
+	curl -fsSL https://yum.dockerproject.org/gpg | sudo apt-key add -
+	sudo apt-get -y install software-properties-common
+	sudo add-apt-repository "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
+	sudo apt-get update
+	sudo apt-get -y install docker-engine
+	sudo service docker start
 fi
 
 echo 'Add current user to Docker group'

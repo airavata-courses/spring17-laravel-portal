@@ -20,6 +20,7 @@ matrix:
 branches:
   only:
     - develop
+    - feature-laravel-portal
 
 sudo: required
 
@@ -54,7 +55,7 @@ deploy:
     acl: public_read
     detect_encoding: true
     on:
-      branch: develop
+      branch: feature-laravel-portal
 
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY #Declared in Travis repository settings
@@ -62,9 +63,9 @@ deploy:
     bucket: laravel-portal-bucket
     key: spring17-laravel-portal.zip
     bundle_type: zip
-    application: laravel-portal-application
-    deployment_group: laravel-portal-group
-    region: us-west-2
+    application: LaravelPortal
+    deployment_group: laravel-autoscale-group
+    region: us-east-2
     skip_cleanup: true
     on:
-      branch: develop
+      branch: feature-laravel-portal
