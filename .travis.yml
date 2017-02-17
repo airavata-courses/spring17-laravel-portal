@@ -48,9 +48,9 @@ deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY #Declared in Travis repository settings
     secret_access_key: $AWS_SECRET_KEY #Declared in Travis repository settings
-    bucket: laravel-portal-bucket
+    bucket: laravel-portal-bucket-us-east
     local_dir: dpl_cd_upload
-    region: us-west-2
+    region: us-east-2
     skip_cleanup: true
     acl: public_read
     detect_encoding: true
@@ -60,7 +60,7 @@ deploy:
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY #Declared in Travis repository settings
     secret_access_key: $AWS_SECRET_KEY #Declared in Travis repository settings
-    bucket: laravel-portal-bucket
+    bucket: laravel-portal-bucket-us-east
     key: spring17-laravel-portal.zip
     bundle_type: zip
     application: LaravelPortal
